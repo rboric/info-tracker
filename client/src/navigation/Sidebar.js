@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { sidebar } from "../css/classes";
 
 export default function Sidebar() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -7,72 +9,74 @@ export default function Sidebar() {
     setSidebarOpen(!isSidebarOpen);
   };
 
-  const class_sidebar_exp =
-    "bg-dark-900 w-56 p-4 flex flex-col h-screen transition-all duration-200";
-  const class_sidebar_col =
-    "bg-dark-900 w-20 p-4 flex flex-col h-screen transition-all duration-200";
-
-  const class_li_exp =
-    "p-4 text-sm text-dark-300 hover:bg-dark-800 rounded-md transition duration-100 cursor-pointer flex items-center justify-between";
-  const class_li_col =
-    "p-4 text-sm text-dark-300 hover:bg-dark-800 rounded-md transition duration-100 cursor-pointer flex items-center justify-center";
-
   return (
     <>
-      <div className={isSidebarOpen ? class_sidebar_exp : class_sidebar_col}>
+      <div
+        className={
+          isSidebarOpen ? sidebar.sidebar.expanded : sidebar.sidebar.collapsed
+        }
+      >
         {isSidebarOpen ? (
           <ul className="mt-4">
-            <li className={class_li_exp}>
-              Dashboard
-              <i class="fa-solid fa-chalkboard"></i>
-            </li>
-            <li className={class_li_exp}>
+            <Link to="/dashboard">
+              <li className={sidebar.li.expanded}>
+                Dashboard
+                <i className="fa-solid fa-chalkboard"></i>
+              </li>
+            </Link>
+            <li className={sidebar.li.expanded}>
               Notifications
-              <i class="fa-solid fa-bell"></i>
+              <i className="fa-solid fa-bell"></i>
             </li>
-            <li className={class_li_exp}>
-              Generator
-              <i class="fa-solid fa-lock"></i>
-            </li>
-            <li className={class_li_exp}>
+            <Link to="/generator">
+              <li className={sidebar.li.expanded}>
+                Generator
+                <i className="fa-solid fa-lock"></i>
+              </li>
+            </Link>
+            <li className={sidebar.li.expanded}>
               Search
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass"></i>
             </li>
-            <li className={class_li_exp}>
+            <li className={sidebar.li.expanded}>
               Trash
-              <i class="fa-solid fa-trash"></i>
+              <i className="fa-solid fa-trash"></i>
             </li>
-            <li className={class_li_exp}>
+            <li className={sidebar.li.expanded}>
               Settings
-              <i class="fa-solid fa-gear"></i>
+              <i className="fa-solid fa-gear"></i>
             </li>
-            <li className={class_li_exp}>
+            <li className={sidebar.li.expanded}>
               Terms of Service
-              <i class="fa-solid fa-paper-plane"></i>
+              <i className="fa-solid fa-paper-plane"></i>
             </li>
           </ul>
         ) : (
           <ul className="mt-4">
-            <li className={class_li_col}>
-              <i class="fa-solid fa-chalkboard"></i>
+            <Link to="/dashboard">
+              <li className={sidebar.li.collapsed}>
+                <i className="fa-solid fa-chalkboard"></i>
+              </li>
+            </Link>
+            <li className={sidebar.li.collapsed}>
+              <i className="fa-solid fa-bell"></i>
             </li>
-            <li className={class_li_col}>
-              <i class="fa-solid fa-bell"></i>
+            <Link to="/generator">
+              <li className={sidebar.li.collapsed}>
+                <i className="fa-solid fa-lock"></i>
+              </li>
+            </Link>
+            <li className={sidebar.li.collapsed}>
+              <i className="fa-solid fa-magnifying-glass"></i>
             </li>
-            <li className={class_li_col}>
-              <i class="fa-solid fa-lock"></i>
+            <li className={sidebar.li.collapsed}>
+              <i className="fa-solid fa-trash"></i>
             </li>
-            <li className={class_li_col}>
-              <i class="fa-solid fa-magnifying-glass"></i>
+            <li className={sidebar.li.collapsed}>
+              <i className="fa-solid fa-gear"></i>
             </li>
-            <li className={class_li_col}>
-              <i class="fa-solid fa-trash"></i>
-            </li>
-            <li className={class_li_col}>
-              <i class="fa-solid fa-gear"></i>
-            </li>
-            <li className={class_li_col}>
-              <i class="fa-solid fa-paper-plane"></i>
+            <li className={sidebar.li.collapsed}>
+              <i className="fa-solid fa-paper-plane"></i>
             </li>
           </ul>
         )}
