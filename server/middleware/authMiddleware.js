@@ -14,9 +14,7 @@ const verifyToken = (req, res, next) => {
 
   try {
     // Verify the token
-    console.log("Before the verify");
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("Decoded Token:", decodedToken);
     // Attach the decoded token to the request for later use if needed
     req.user = decodedToken;
 

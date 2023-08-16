@@ -1,23 +1,43 @@
-export default function Note({ something }) {
+import { components } from "../css/classes";
+
+export default function Note({
+  data,
+  noteSidebar,
+  setNoteSidebar,
+  setNote,
+  setAddNew,
+}) {
   return (
     <>
-      <div className="max-w-sm rounded overflow-auto shadow-md bg-dark-700 m-8 transition duration-200ms ease-in-out hover:cursor-pointer hover:scale-105 hover:shadow-xl">
+      <div
+        onClick={() => {
+          setNote(data);
+          setAddNew(false);
+          // eslint-disable-next-line
+          {
+            !noteSidebar && setNoteSidebar(!noteSidebar);
+          }
+        }}
+        className={components.note}
+      >
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2 text-dark-200">
-            {something}
+          <div className="font-semibold text-md mb-2 text-dark-200 break-words">
+            {data.title}
           </div>
-          <p className="text-dark-200 text-base">
-            This is a simple card component using Tailwind CSS.This is a simple
-            This is a simple card component using Tailwind CSS.This is a
-            simpleThis is a simple card component using Tailwind CSS.This is a
-            simple
+          <p
+            style={{ color: data.content.color }}
+            className={`text-dark-200 break-words ${
+              data.content.fontSize + " " + data.content.fontWeight
+            }`}
+          >
+            {data.content.value}
           </p>
         </div>
         <div className="px-6 py-4">
-          <span className="inline-block bg-dark-800 rounded-md px-3 py-1 text-sm font-semibold text-dark-200 mr-2">
+          <span className="inline-block bg-dark-800 rounded-sm px-3 py-1 text-sm font-semibold text-dark-200 mr-2">
             Tag 1
           </span>
-          <span className="inline-block bg-dark-800 rounded-md px-3 py-1 text-sm font-semibold text-dark-200">
+          <span className="inline-block bg-dark-800 rounded-sm px-3 py-1 text-sm font-semibold text-dark-200">
             Tag 2
           </span>
         </div>

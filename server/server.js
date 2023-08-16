@@ -4,11 +4,13 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
-// Models
-const User = require("./models/user");
-
 // Controllers
 const { registerUser, loginUser } = require("./controllers/authController");
+const {
+  createNote,
+  getNotes,
+  deleteNote,
+} = require("./controllers/noteController");
 
 const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.m5nbwb2.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
 
@@ -18,7 +20,7 @@ const PORT = process.env.PORT;
 
 // Middleware
 const verifyToken = require("./middleware/authMiddleware");
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -40,11 +42,11 @@ app.post("/register", registerUser);
 // User login route
 app.post("/login", loginUser);
 
-app.get("/dashboard", verifyToken, (req, res) => {
-  // If the token is valid, the decoded token is available in req.user
-  // You can access the user information like req.user.email
-  res.json({ message: "This is a protected route!", user: req.user });
-});
+app.get("/dashboard", verifyToken, getNotes);
+
+app.post("/note", verifyToken, createNote);
+
+app.delete("/note/:id", verifyToken, deleteNote);
 
 // Start the server
 app.listen(PORT, () => {

@@ -14,3 +14,11 @@ export const getTokenFromStorage = () => {
 export const removeTokenFromStorage = () => {
   localStorage.removeItem(TOKEN_KEY);
 };
+
+export const checkForToken = (navigate) => {
+  const token = getTokenFromStorage();
+
+  if (!token) {
+    navigate("/");
+  }
+};

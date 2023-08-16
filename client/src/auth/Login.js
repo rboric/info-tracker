@@ -59,9 +59,8 @@ export default function Login() {
           </form>
           <button
             onClick={login}
-            className="px-4 py-2 bg-dark-600 rounded-sm hover:bg-dark-700 transition ease-in-out duration-100ms text-dark-200 shadow-xl"
+            className="px-4 py-2 bg-dark-600 rounded-sm hover:bg-dark-700 active:bg-dark-800 hover:border-red-300 transition ease-in-out duration-100ms text-dark-200 shadow-xl"
           >
-            {" "}
             Sign in
           </button>
           <div className={errors.login}>{error}</div>
